@@ -1,8 +1,8 @@
 import './App.css';
 import './styles.css'
 import * as PokemonDetails from './resources/pokemon.json'
-import FilteredPokemon from "./components/PokemonGallery";
 import PageTitle from "./components/PageTitle";
+import FilteredPokemon from "./components/FilteredPokemon";
 
 const App = () => {
   return (<div className="App">

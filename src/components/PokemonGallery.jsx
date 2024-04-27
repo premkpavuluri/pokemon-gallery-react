@@ -1,14 +1,13 @@
 import React from "react";
 import Pokemon from "./Pokemon";
-import {FilterSearch, LoadMoreButton, ResetButton} from "./ActionControls";
+import {LoadMoreButton, ResetButton} from "./ActionControls";
 
-class FilteredPokemon extends React.Component {
+class PokemonGallery extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {loadUpto: 10, filter: ''}
+    this.state = {loadUpto: 10}
     this.loadMore = this.loadMore.bind(this);
     this.reset = this.reset.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   loadMore() {
@@ -25,24 +24,18 @@ class FilteredPokemon extends React.Component {
     });
   }
 
-  handleFilterChange(value) {
-    this.setState({...this.state, filter: value});
-  }
-
-  filter() {
+  sliceByCount() {
     return this.props.pokemonDetails
-        .filter(({name}) => name.toLowerCase().includes(this.state.filter.toLowerCase()))
         .slice(0, this.state.loadUpto);
   }
 
   render() {
-    const pokemonList = this.filter()
+    const pokemonList = this.sliceByCount()
         .map(({pkdx_id, name, art_url}) =>
             <Pokemon key={pkdx_id} name={name} imageUrl={art_url}/>
         );
 
     return (<div className="pokemon-gallery">
-      <FilterSearch value={this.state.filter} onChangeHandler={this.handleFilterChange}/>
       <div className="pokemons-view">{pokemonList}</div>
       <div className="load-and-reset">
         <ResetButton onClick={this.reset}/>
@@ -52,4 +45,4 @@ class FilteredPokemon extends React.Component {
   }
 }
 
-export default FilteredPokemon;
+export default PokemonGallery;
