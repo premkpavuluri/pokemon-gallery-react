@@ -8,4 +8,11 @@ const ResetButton = ({onClick}) => {
   return <button className="btn-controls" onClick={onClick}>Reset</button>;
 }
 
-export {LoadMoreButton, ResetButton};
+const FilterSearch = ({value, onChangeHandler}) =>
+    <div className="search-section">
+      <input
+          value={value}
+          onChange={(event) => onChangeHandler(event.target.value)}/>
+    </div>
+
+export {LoadMoreButton, ResetButton, FilterSearch};
