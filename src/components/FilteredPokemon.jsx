@@ -15,7 +15,7 @@ class FilteredPokemon extends React.Component {
 
   filter() {
     return this.props.pokemonDetails
-        .filter(({name}) => name.includes(this.state.filter))
+        .filter(({name}) => name.toLowerCase().includes(this.state.filter.toLowerCase()))
   }
 
   render() {
