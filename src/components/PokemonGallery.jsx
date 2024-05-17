@@ -5,7 +5,7 @@ import {LoadMoreButton, ResetButton} from "./ActionControls";
 class PokemonGallery extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {loadUpto: 10}
+    this.state = {loadUpto: 15}
     this.loadMore = this.loadMore.bind(this);
     this.reset = this.reset.bind(this);
   }
@@ -20,7 +20,7 @@ class PokemonGallery extends React.Component {
   reset() {
     this.setState({
       ...this.state,
-      loadUpto: 10
+      loadUpto: 15
     });
   }
 
@@ -32,7 +32,7 @@ class PokemonGallery extends React.Component {
   render() {
     const pokemonList = this.sliceByCount()
         .map(({pkdx_id, name, art_url}) =>
-            <Pokemon key={pkdx_id} name={name} imageUrl={art_url}/>
+            <Pokemon key={pkdx_id} pokemonId={pkdx_id} name={name} imageUrl={art_url}/>
         );
 
     return (<div className="pokemon-gallery">

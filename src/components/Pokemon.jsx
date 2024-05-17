@@ -1,11 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import usePokemon from "../hooks/usePokemon";
+import PokemonImage from "./PokemonImage";
+import Loader from "./Loader";
 
-const Pokemon = ({name, imageUrl}) => {
+const Pokemon = ({pokemonId, name, imageUrl}) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const pokemon = usePokemon(pokemonId);
+  useEffect(() => {
+    if (pokemon) {
+      // Simulating a delay to show the loader
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000);
+    }
+  }, [pokemon]);
+
   return (<div className="pokemon-card">
-    <figure>
-      <img className="image-container" src={imageUrl} alt={name}/>
-      <figcaption>{name}</figcaption>
-    </figure>
+    {isLoading ? <Loader></Loader> : <PokemonImage name={pokemon.name} imageUrl={pokemon.imageUrl}/>}
   </div>);
 };
 
